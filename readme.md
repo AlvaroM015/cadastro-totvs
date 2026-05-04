@@ -50,7 +50,7 @@ O sistema permite realizar o cadastro e gerenciamento de funcionários de forma 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/seu-usuario/seu-repositorio.git](https://github.com/AlvaroM015/cadastro-totvs
 ```
 
 ### 2. Acesse a pasta
