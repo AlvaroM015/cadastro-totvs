@@ -57,3 +57,30 @@ def buscar_funcionario(id: int):
             return f
 
     raise HTTPException(status_code=404, detail="Funcionário não encontrado")
+
+# Checkpoint 3 - PUT e DELETE 
+
+# PUT
+@app.put("/funcionarios/{id}")
+def atualizar_funcionario(id: int, funcionario: Funcionario):
+    for f in funcionarios:
+        if f["id"] == id:
+            f["nome"] = funcionario.nome
+            f["cargo"] = funcionario.cargo
+            f["idade"] = funcionario.idade
+            f["salario"] = funcionario.salario
+
+            return f
+
+    raise HTTPException(status_code=404, detail="Funcionário não encontrado")
+
+
+# DELETE
+@app.delete("/funcionarios/{id}")
+def deletar_funcionario(id: int):
+    for i, f in enumerate(funcionarios):
+        if f["id"] == id:
+            funcionarios.pop(i)
+            return {"mensagem": "Funcionário removido"}
+
+    raise HTTPException(status_code=404, detail="Funcionário não encontrado")

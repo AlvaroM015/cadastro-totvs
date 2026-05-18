@@ -2,10 +2,11 @@ const API = "http://127.0.0.1:8000/funcionarios";
 
 const lista = document.getElementById("lista");
 
+let editandoId = null;
+
 document.getElementById("form").addEventListener("submit", async (e) => {
     e.preventDefault();
-    
-    // criando uma const para receber os campos digitados 
+
     const funcionario = {
         nome: document.getElementById("nome").value,
         cargo: document.getElementById("cargo").value,
@@ -13,12 +14,24 @@ document.getElementById("form").addEventListener("submit", async (e) => {
         salario: parseFloat(document.getElementById("salario").value)
     };
 
-    // criando um fetch 
-    await fetch(API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(funcionario)
-    });
+    // EDITAR
+    if (editandoId !== null) {
+        await fetch(`${API}/${editandoId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(funcionario)
+        });
+
+        editandoId = null;
+
+    } else {
+        // CADASTRAR
+        await fetch(API, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(funcionario)
+        });
+    }
 
     document.getElementById("form").reset();
 
@@ -38,10 +51,37 @@ async function listarFuncionarios() {
             <p>Cargo: ${p.cargo}</p>
             <p>Idade: ${p.idade}</p>
             <p>Salário: R$ ${p.salario}</p>
+
+            <button onclick="editarFuncionario(${p.id})">
+                Editar
+            </button>
+
+            <button onclick="deletarFuncionario(${p.id})">
+                Excluir
+            </button>
         </div>
     `;
     });
 }
 
+async function deletarFuncionario(id) {
+    await fetch(`${API}/${id}`, {
+        method: "DELETE"
+    });
+
+    listarFuncionarios();
+}
+
+async function editarFuncionario(id) {
+    const res = await fetch(`${API}/${id}`);
+    const funcionario = await res.json();
+
+    document.getElementById("nome").value = funcionario.nome;
+    document.getElementById("cargo").value = funcionario.cargo;
+    document.getElementById("idade").value = funcionario.idade;
+    document.getElementById("salario").value = funcionario.salario;
+
+    editandoId = id;
+}
 
 listarFuncionarios();
