@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000/funcionarios";
+const API = "https://cadastro-totvs.onrender.com/funcionarios";
 
 const lista = document.getElementById("lista");
 
