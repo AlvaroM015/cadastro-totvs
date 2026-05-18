@@ -62,13 +62,13 @@ cd cadastro-totvs
 ### 3. Crie o ambiente virtual (opcional)
 
 ```bash
-python -m venv venv
+python -m venv ambiente
 ```
 
 ### 4. Ative o ambiente
 
 ```bash
-venv\Scripts\activate   # Windows
+ambiente\Scripts\activate   # Windows
 ```
 
 ### 5. Instale as dependências
