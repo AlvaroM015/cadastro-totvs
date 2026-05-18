@@ -56,7 +56,7 @@ git clone https://github.com/seu-usuario/seu-repositorio.git](https://github.com
 ### 2. Acesse a pasta
 
 ```bash
-cd seu-repositorio
+cd cadastro-totvs
 ```
 
 ### 3. Crie o ambiente virtual (opcional)
